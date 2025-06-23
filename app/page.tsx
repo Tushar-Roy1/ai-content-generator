@@ -57,7 +57,7 @@ export default function Home() {
       <p className="text-gray-600 text-sm">Ready-made content formats for all needs.</p>
     </div>
     <div className="flex flex-col items-center">
-      <Image src={'/Free.svg'} alt="Free" width={30} height={30} />
+      <Image src={'/free.svg'} alt="Free" width={30} height={30} />
       <h3 className="font-semibold text-lg">Free to Use</h3>
       <p className="text-gray-600 text-sm">Start without any payment barrier.</p>
     </div>
