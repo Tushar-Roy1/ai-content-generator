@@ -1,64 +1,66 @@
-'use client'
-import React, { useEffect } from 'react'
-import { FileClock, History, Home, Settings, WalletCards } from 'lucide-react'
-import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
-import TrackUsage from './TrackUsage'
+'use client';
 
-function SideNav() {
-    const MenueList = [
-        {
-            name: 'Home',
-            logo: Home,
-            path: '/dashboard'
-        },
-        {
-            name: 'Billing',
-            logo: WalletCards,
-            path: '/dashboard/billing'
-        },
-        {
-            name: 'History',
-            logo: FileClock,
-            path: '/dashboard/history'
-        },
-        {
-            name: 'Settings',
-            logo: Settings,
-            path: '/dashboard/settings'
-        },
-    ]
+import React from 'react';
+import { FileClock, Home, Settings, WalletCards, X } from 'lucide-react';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import TrackUsage from './TrackUsage';
 
-    const path = usePathname();
-    const router = useRouter();
+type Props = {
+  onClose?: () => void;
+};
 
-    useEffect(() => {
-        console.log(path)
-    }, [path]);
+const SideNav = ({ onClose }: Props) => {
+  const path = usePathname();
+  const router = useRouter();
 
-    return (
-        <div className='h-screen relative p-5 shadow-sm border bg-white'>
-            <div className='flex justify-center'>
-                <Image src={'/image.svg'} alt='logo' width={100} height={100} />
-            </div>
-            <div className='mt-5'>
-                {MenueList.map((menue, index) => (
-                    <div
-                        key={menue.name || index}
-                        className={`flex gap-2 mb-2 p-3 hover:bg-purple-500 hover:text-white rounded-lg cursor-pointer
-                        ${path === menue.path && 'bg-purple-500 text-white'}`}
-                        onClick={() => router.push(menue.path)}
-                    >
-                        <menue.logo className='' />
-                        <h2>{menue.name}</h2>
-                    </div>
-                ))}
-            </div>
-            <div className='absolute bottom-10 left-1 w-full'>
-                <TrackUsage />
-            </div>
-        </div>
-    )
-}
+  const MenueList = [
+    { name: 'Home', logo: Home, path: '/dashboard' },
+    { name: 'Billing', logo: WalletCards, path: '/dashboard/billing' },
+    { name: 'History', logo: FileClock, path: '/dashboard/history' },
+    { name: 'Settings', logo: Settings, path: '/dashboard/settings' },
+  ];
 
-export default SideNav
+  return (
+    <div className="h-full bg-white shadow-sm p-4 flex flex-col justify-between">
+      <div>
+        {/* Logo + Close button on mobile */}
+        <div className="flex justify-between items-center mb-6">
+  {/* Close button (left side) */}
+  {onClose && <X className="md:hidden cursor-pointer" onClick={onClose} />}
+
+  {/* Logo aligned right */}
+  <Image
+    src="/image.svg"
+    alt="Logo"
+    width={100}
+    height={40}
+    className="ml-8"
+  />
+</div>
+
+
+        {/* Navigation links */}
+        {MenueList.map((menu) => (
+          <div
+            key={menu.name}
+            className={`flex items-center  gap-2 p-3 rounded-lg cursor-pointer mb-2 ${
+              path === menu.path ? 'bg-purple-600 text-white' : 'hover:bg-purple-100 text-gray-700'
+            }`}
+            onClick={() => {
+              router.push(menu.path);
+              if (onClose) onClose(); // Close on click in mobile
+            }}
+          >
+            <menu.logo size={18} />
+            <span className="text-lg font-semibold">{menu.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <TrackUsage />
+    </div>
+  );
+};
+
+export default SideNav;

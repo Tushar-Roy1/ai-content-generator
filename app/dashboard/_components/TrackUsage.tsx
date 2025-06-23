@@ -45,7 +45,7 @@ const TrackUsage = () => {
   const percentage = Math.min((totalUsage / maxCredits) * 100, 100)
 
   return (
-    <div className='m-5'>
+    <div className='m-2'>
       <div className='bg-purple-700 text-white p-3 rounded-lg'>
         <h2>Credits</h2>
         <div className='h-2 bg-purple-400 w-full rounded-full mt-3'>

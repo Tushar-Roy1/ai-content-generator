@@ -1,11 +1,15 @@
 'use client';
 
 import { UserButton, useUser } from '@clerk/nextjs';
-import { Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
-function Header() {
+type HeaderProps = {
+  onMenuClick?: () => void;
+};
+
+const Header = ({ onMenuClick }: HeaderProps) => {
   const { user } = useUser();
   const [isPro, setIsPro] = useState(false);
 
@@ -27,34 +31,41 @@ function Header() {
   }, [email]);
 
   return (
-    <header className="p-4 shadow-sm border-b flex flex-col md:flex-row justify-between items-center gap-4 bg-white">
-      {/* Search Bar */}
-      <div className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-md w-full max-w-md bg-gray-100 focus-within:ring-2 focus-within:ring-purple-500 transition">
-        <Search className="text-gray-500" size={18} />
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400"
+    <header className="bg-white flex items-center justify-between p-4 shadow-sm border-b flex-wrap gap-2">
+      {/* Left: Logo & Brand */}
+      <div className="flex items-center gap-2">
+        <Image
+          src="/image.svg"
+          alt="Logo"
+          width={36}
+          height={36}
+          className="rounded-full border-2 border-purple-600 p-1 cursor-pointer md:hidden"
+          onClick={onMenuClick}
         />
+        <h1 className="text-lg font-bold text-purple-700">Genivo</h1>
       </div>
 
-      {/* Conditional Membership Banner */}
-      {!isPro ? (
-        <Link href="/dashboard/billing">
-          <div className="bg-gradient-to-r from-purple-600 to-purple-500 rounded-full px-6 py-2 text-sm text-white font-semibold shadow-md hover:scale-105 transition-transform cursor-pointer">
-            💎 Join Membership for <span className="font-bold">₹99</span> Only
+      {/* Center: Membership Banner */}
+      <div className="flex-grow text-center">
+        {!isPro ? (
+          <Link href="/dashboard/billing">
+            <div className="bg-gradient-to-r from-purple-600 to-purple-500 rounded-full px-4 py-1 text-xs text-white font-semibold shadow hover:scale-105 transition inline-block whitespace-nowrap">
+              💎 Join Membership for ₹99 Only
+            </div>
+          </Link>
+        ) : (
+          <div className="bg-green-600 rounded-full px-4 py-1 text-md text-white font-semibold shadow inline-block whitespace-nowrap">
+            ✅ You are a Pro Member
           </div>
-        </Link>
-      ) : (
-        <div className="bg-green-600 rounded-full px-6 py-2 text-sm text-white font-semibold shadow-md">
-          ✅ You are a Pro Member
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* User Profile */}
-      <UserButton />
+      {/* Right: User Profile */}
+      <div className="flex-shrink-0">
+        <UserButton />
+      </div>
     </header>
   );
-}
+};
 
 export default Header;

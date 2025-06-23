@@ -40,7 +40,7 @@ function HistoryPage() {
   };
 
   return (
-    <div className="p-6 bg-slate-200">
+    <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Usage History</h2>
       <table className="w-full border">
         <thead className="bg-gray-200">

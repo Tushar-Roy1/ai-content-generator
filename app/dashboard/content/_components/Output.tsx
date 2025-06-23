@@ -1,10 +1,11 @@
-'use client'
+'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import toast from 'react-hot-toast'; // ✅ Import toast
 
 const Editor = dynamic(
   () => import('@toast-ui/react-editor').then((mod) => mod.Editor),
@@ -13,9 +14,9 @@ const Editor = dynamic(
 
 interface OutputProps {
   result?: string;
-  formData?: object;        // optional: pass if you have form data
-  templateSlug?: string;    // optional: pass template slug if any
-  userEmail?: string;       // optional: pass user email if available
+  formData?: object;
+  templateSlug?: string;
+  userEmail?: string;
 }
 
 function Output({ result, formData, templateSlug, userEmail }: OutputProps) {
@@ -30,12 +31,11 @@ function Output({ result, formData, templateSlug, userEmail }: OutputProps) {
   }, [result]);
 
   useEffect(() => {
-    if (!result) return; // only save if result exists
+    if (!result) return;
 
     const saveResponse = async () => {
       setSaving(true);
       try {
-        // Save the latest AI response from result prop
         const response = await fetch('/api/save-response', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -65,7 +65,7 @@ function Output({ result, formData, templateSlug, userEmail }: OutputProps) {
       const editorInstance = editorRef.current.getInstance();
       const markdown = editorInstance.getMarkdown();
       navigator.clipboard.writeText(markdown).then(() => {
-        alert('Copied to clipboard!');
+        toast.success('Copied to clipboard!'); // ✅ Toast message
       });
     }
   };

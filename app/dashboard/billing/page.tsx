@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs'; // ✅ Clerk hook
+import toast from 'react-hot-toast';
 
 const plans = [
   {
@@ -90,7 +91,7 @@ const fetchPlan = async (email: string) => {
         name: 'Content App Pro Plan',
         description: '₹99/month subscription',
         handler: async function (response: any) {
-          alert('Subscription successful!');
+          toast.success('Subscribed Successfully🎉')
           console.log('Razorpay Response:', response);
 
           // ✅ Send dynamic user info to backend
