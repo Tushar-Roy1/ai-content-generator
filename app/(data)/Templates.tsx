@@ -81,6 +81,27 @@ export default  [
 
     },
     {
+  name: 'LinkedIn Post Generator',
+  desc: 'Generate engaging and professional LinkedIn posts to build your brand and boost engagement.',
+  icon: 'https://cdn-icons-png.flaticon.com/128/3536/3536505.png',
+  category: 'Social Media',
+  slug: 'linkedin-post-generator',
+  aiPrompt: 'Generate a compelling LinkedIn post based on the topic and tone, output in rich text editor format.',
+  form: [
+    {
+      label: 'Enter post topic or idea',
+      field: 'input',
+      name: 'topic',
+      required: true
+    },
+    {
+      label: 'Describe your goal or tone (optional)',
+      field: 'textarea',
+      name: 'tone'
+    }
+  ]
+},
+    {
 
         name: 'Youtube Description',
         desc: 'An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.',
@@ -191,24 +212,27 @@ export default  [
            
         ]
     },
+   {
+  name: 'Tweet Thread Writer',
+  desc: 'Turn your idea into a structured, engaging Twitter/X thread.',
+  icon: 'https://cdn-icons-png.flaticon.com/128/733/733579.png',
+  category: 'Social Media',
+  slug: 'tweet-thread-writer',
+  aiPrompt: 'Generate a Twitter thread with hook, body, and CTA based on user input in bullet format.',
+  form: [
     {
-        name: 'Instagram Hash Tag Generator',
-        desc: 'An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.',
-        icon: 'https://cdn-icons-png.flaticon.com/128/7045/7045432.png',
-        category: 'blog',
-       
-        slug: 'instagram-hash-tag-generator',
-        aiPrompt: 'Generate 15 Instagram hash tag depends on a given keywords and give output in  in rich text editor format',
-        form: [
-            {
-                label: 'Enter Keywords for your instagram hastag',
-                field: 'input',
-                name: 'keywords',
-                required:true
-            },
-           
-        ]
+      label: 'Thread Topic',
+      field: 'input',
+      name: 'threadTopic',
+      required: true
     },
+    {
+      label: 'Optional key points to include',
+      field: 'textarea',
+      name: 'keyPoints'
+    }
+  ]
+},
     {
         name: 'Instagram Post/Reel Idea',
         desc: 'An AI tool that generate New and trending instagram idea depends on your niche',
@@ -347,6 +371,24 @@ export default  [
            
         ]
     },
+    {
+  name: 'Professional Email Generator',
+  desc: 'Craft polished, professional emails with ease. Ideal for work, client, or business communication.',
+  icon: 'https://cdn-icons-png.flaticon.com/128/6460/6460619.png',
+  category: 'Writing Assistant',
+  slug: 'professional-email-generator',
+  aiPrompt: 'Write a professional email based on the user input and context in rich text editor format',
+  form: [
+    {
+      label: 'Enter the context or purpose of the email',
+      field: 'textarea',
+      name: 'emailContext',
+      required: true
+    }
+  ]
+},
+
+
 
 
 
